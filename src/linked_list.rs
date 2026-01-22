@@ -1,3 +1,4 @@
+#[derive(Debug)]
 struct LinkedList<T> {
     head: Option<ListNode<T>>,
 }
@@ -26,6 +27,7 @@ where
     }
 }
 
+#[derive(Debug)]
 struct ListNode<T> {
     element: T,
     next: Option<Box<ListNode<T>>>,
@@ -150,5 +152,29 @@ impl<T> LinkedList<T> {
         }
 
         curr
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test() {
+        let mut list = LinkedList::new();
+
+        list.push(1);
+        list.push(2);
+        list.push(3);
+
+        let immutable_ref = &list;
+
+        let mut iter = immutable_ref.iter();
+
+        while let Some(i) = iter.next() {
+            println!("{}", i);
+        }
+
+        println!("{:?}", *immutable_ref);
+        println!("{:?}", list);
     }
 }
